@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Bean & Balance{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f7f4ef; color: #2f2924; }
+    .navbar, .btn-primary { background-color: #4b2e22 !important; }
+    .btn-primary { border-color: #4b2e22; }
+    .btn-primary:hover { background-color: #352019 !important; }
+    .brand-mark { color: #d69a4a; letter-spacing: .08em; }
+    .hero { background: #4b2e22; color: #fffaf3; }
+    .stat { border-left: 4px solid #d69a4a; }
+    .table > :not(caption) > * > * { background-color: #fffdf9; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-dark mb-4"><div class="container"><a class="navbar-brand fw-bold" href="{{ url_for('landing') }}"><span class="brand-mark">BEAN</span> & BALANCE</a><div>{% if session.get('user_id') %}<span class="text-white-50 me-3">{{ session.get('username') }}</span><a class="btn btn-sm btn-outline-light" href="{{ url_for('logout') }}">Log out</a>{% else %}<a class="btn btn-sm btn-outline-light" href="{{ url_for('login') }}">Staff login</a>{% endif %}</div></div></nav>
+<main class="container pb-5">{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="alert alert-{{ category }}">{{ message }}</div>{% endfor %}{% endwith %}{% block content %}{% endblock %}</main>
+</body>
+</html>
